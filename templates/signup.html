@@ -10,33 +10,35 @@
         <div class="center"><h1>My Cine World</h1></div>
         <div class="my_pannel">
             <div class="center"><h2>Sign up</h2></div>
+            <form action="/register" method="POST">
             <div class="input_form">
                 <div class="mb-3">
                     <label for="user_name" class="form-label">User Name(Email)</label>
-                    <input type="email" class="form-control" id="user_name" placeholder="iitm@study.ac.in">
+                    <input type="email" class="form-control" name="user_name" id="user_name" placeholder="iitm@study.ac.in">
                   </div>
                   <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="password">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="password">
                   </div>
                   <div class="mb-3">
                     <label for="full_name" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="full_name" placeholder="name">
+                    <input type="text" class="form-control" name="full_name" id="full_name" placeholder="name">
                   </div>
                   <div class="mb-3">
                     <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="location" placeholder="chennai">
+                    <input type="text" class="form-control" name="location" id="location" placeholder="chennai">
                   </div>
                   <div class="mb-3">
                     <label for="pin_code" class="form-label">Pincode</label>
-                    <input type="text" class="form-control" id="pin_code" placeholder="500001">
+                    <input type="text" class="form-control" name="pin_code" id="pin_code" placeholder="500001">
                   </div>
                   <div class="mb-3">
-                    <button type="button" class="btn btn-primary">Submit</button>
-                    Existing user?<a href="#">Log in</a> 
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    Existing user?<a href="/login">Log in</a> 
+                    <div class="err_msg">{{msg}}</div>  <!--jinjatemplate -->
                   </div>
 
-            </div>
+            </div></form>
         </div>
     </div>
 </body>

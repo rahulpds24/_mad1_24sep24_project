@@ -35,3 +35,8 @@
     margin: auto;
     color:blue;
 }
+.err_msg{
+    text-align: center;
+    margin: auto;
+    color: maroon;
+}
