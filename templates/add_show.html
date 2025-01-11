@@ -1,0 +1,36 @@
+{%extends "admin_layout.html"%}  
+{%block content%}
+            
+            <div class="center"><h2>Add Show</h2></div>
+            <form action="#" method="POST">
+            <div class="input_form">
+              <div class="mb-3">
+                <label for="v_id" class="form-label">Venue Id</label>
+                <input type="number" class="form-control" name="v_id" id="v_id" value="{{venue_id}}" readonly>
+              </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="">
+                  </div>
+                  <div class="mb-3">
+                    <label for="tags" class="form-label">Tags</label>
+                    <input type="text" class="form-control" name="tags" id="tags" placeholder="gener">
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="ticket_price" class="form-label">Ticket Price</label>
+                    <input type="number" class="form-control" name="ticket_price" id="ticket_price" placeholder="0">
+                  </div>
+                  <div class="mb-3">
+                    <label for="dt_time" class="form-label">Date&Time</label>
+                    <input type="datetime-local" class="form-control" name="dt_time" id="dt_time" placeholder="0">
+                  </div>
+                 
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="/admin/{{name}}" type="button" class="btn btn-primary">Cancel</a> 
+                    
+                  </div>
+
+            </div></form>
+            {%endblock%}

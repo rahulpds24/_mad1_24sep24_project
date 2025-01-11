@@ -18,9 +18,9 @@
                             {%endfor%}
                           </table>
                           {%else%}
-                          <p>Now Shoe here</p>
+                          <p>Now Show here</p>
                           {%endif%}
-                          <button type="button" class="btn btn-outline-primary">Add Show</button>
+                          <a href="/show/{{theatre.id}}/{{name}}" type="button" class="btn btn-outline-primary">Add Show</a>
                         </div>
                        
                       </div>
@@ -34,7 +34,8 @@
                 <h3 class="center">No Venue available</h3>
                 {%endif%}
                 </div>
-                <div class="center"><button type="button" class="btn btn-primary">+Add Venue</button>
+                <div class="center">
+                    <a href="/venue/{{name}}" type="button" class="btn btn-primary">+Add Venue</a>
               </div>
               {%endblock%}
        
