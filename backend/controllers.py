@@ -82,7 +82,7 @@ def add_show(venu_id,name):
         db.session.commit()
         return redirect(url_for("admin_dashboard",name=name))
        
-    return render_template("add_show.html",venu_id=venu_id,name=name)
+    return render_template( "add_show.html",venu_id=venu_id,name=name)
 
 @app.route("/search/<name>",methods=["GET","POST"])
 def search(name):
@@ -96,6 +96,23 @@ def search(name):
             return render_template("admin_dashboard.html",name=name,theatres=by_location)
 
     return redirect(url_for("admin_dashboard",name=name))
+
+@app.route("/edit_venue/< id>/<name>",methods=["POST","GET"])
+def edit_venue(id,name):
+    v=get_venue(id)
+    if request.method=="POST":
+        tname=request.form.get("name")
+        location=request.form.get("location")
+        pin_code=request.form.get("pin_code")
+        capacity=request.form.get("capacity")
+        v.name=tname
+        v.locaton=location
+        v.pin_code=pin_code
+        v.capacity=capacity
+        db.session.commit()
+        return redirect(url_for("admin_dashboard",name=name))
+    return render_template("edit_venue.html",venue=v,name=name)
+
 
 
 
@@ -116,3 +133,6 @@ def search_by_venue(search_txt):
 def search_by_location(search_txt):
     theatres=Theatre.query.filter(Theatre.location.ilike(f"%{search_txt}%")).all()
     return theatres
+def get_venue(id):
+    theatre=Theatre.query.filter(id=id).first()
+    return theatre
