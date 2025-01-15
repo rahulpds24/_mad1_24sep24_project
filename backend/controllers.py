@@ -51,7 +51,8 @@ def admin_dashboard(name):
 
 @app.route("/user/<name>")
 def user_dashboard(name):
-    return render_template("user_dashboard.html",name=name)
+    theatres=get_theatres()
+    return render_template("user_dashboard.html",name=name,theatres=theatres)
 
 #common route for admin dashboard
 @app.route("/venue/<name>",methods=["POST","GET"])

@@ -1,76 +1,37 @@
 {%extends "user_layout.html"%}
 {%block content%}
+{%if theatres%}
+      {%for theatre in theatres%}
+        {%if theatre.shows%}
               <!-- venue1 started -->
               <div class="outer_box">
-                Venue#1
+                <!-- Venue#1 -->
+                 {{theatre.name}}
               <div class="container">
                 <div class="row">
+                  {%for show in theatre.shows%}
                   <div class="col">
                     <!-- show 1 card here -->
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                          <h5 class="card-title">show#1</h5>
-                          <h6 class="card-subtitle">action movie</h6>
-                          <button type="button" class="btn btn-outline-danger">Houseful</button>
+                          <h5 class="card-title">{{show.name}}</h5>
+                          <h6 class="card-subtitle">{{show.tags}}</h6>
+                          <button type="button" class="btn btn-outline-priamry">Book</button>
                         </div>
                        
                       </div>
 
-                    <!-- end of show 1 -->
+                    
                   </div>
-                  <div class="col">
-                    <!-- show2 card here -->
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                          <h5 class="card-title">show#2</h5>
-                          <h6 class="card-subtitle">comedy</h6>
-                          <button type="button" class="btn btn-outline-primary">Book</button>
-                        </div>
-                       
-                      </div>
-
-                    <!-- end of show2 -->
-                  </div>
+                  {%endfor%}
+                 
                   
                 </div>
               </div>
-              </div>
-              <!-- venue2 started -->
-              <div class="outer_box">
-                Venue#2
-              <div class="container">
-                <div class="row">
-                  <div class="col">
-                    <!-- show 1 card here -->
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                          <h5 class="card-title">show#1</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">action movie</h6>
-                          <button type="button" class="btn btn-outline-warning">Booking fast</button>
-                        </div>
-                       
-                      </div>
-
-                    <!-- end of show 1 -->
-                  </div>
-                  <div class="col">
-                    <!-- show2 card here -->
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                          <h5 class="card-title">show#2</h5>
-                          <h6 class="card-subtitle">comedy</h6>
-                          <button type="button" class="btn btn-outline-primary">Book</button>
-                        </div>
-                       
-                      </div>
-
-                    <!-- end of show2 -->
-                  </div>
-                  
-                </div>
-              </div>
-              </div>
+              </div>{%endif%}
+              {%endfor%}
         
-        <div class="center">
-        <button type="button" class="btn btn-primary">+Add Venue</button></div>
+        {%else%}
+        <h3 class="center">Sorry no theatre available</h3>
+        {%endif%}
     {%endblock%}
