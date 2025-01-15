@@ -129,7 +129,7 @@ def edit_show(id,name):
         ticket_price=request.form.get("ticket_price")
         date_time=request.form.get("dt_time")
         dt_time=datetime.strptime(date_time,"%Y-%m-%dT%H:%M")
-        s.name=sname
+        s.sname=sname
         s.tags=tags
         s.ticket_price=ticket_price
         s.date_time=dt_time
