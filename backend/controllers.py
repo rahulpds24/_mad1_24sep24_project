@@ -97,7 +97,7 @@ def search(name):
 
     return redirect(url_for("admin_dashboard",name=name))
 
-@app.route("/edit_venue/< id>/<name>",methods=["POST","GET"])
+@app.route("/edit_venue/<id>/<name>",methods=["POST","GET"])
 def edit_venue(id,name):
     v=get_venue(id)
     if request.method=="POST":
@@ -112,6 +112,40 @@ def edit_venue(id,name):
         db.session.commit()
         return redirect(url_for("admin_dashboard",name=name))
     return render_template("edit_venue.html",venue=v,name=name)
+
+@app.route("/delete_venue/<id>/<name>",methods=["GET","POST"])
+def delete_venue(id,name):
+    v=get_venue(id)
+    db.session.delete(v)
+    db.session.commit()
+    return redirect(url_for("admin_dashboard",name=name))
+
+@app.route("/edit_show/<id>/<name>",methods=["POST","GET"])
+def edit_show(id,name):
+    s=get_show(id)
+    if request.method=="POST":
+        sname=request.form.get("sname")
+        tags=request.form.get("tags")
+        ticket_price=request.form.get("ticket_price")
+        date_time=request.form.get("dt_time")
+        dt_time=datetime.strptime(date_time,"%Y-%m-%dT%H:%M")
+        s.name=sname
+        s.tags=tags
+        s.ticket_price=ticket_price
+        s.date_time=dt_time
+        db.session.commit()
+        return redirect(url_for("admin_dashboard",name=name))
+    return render_template("edit_show.html",show=s,name=name)
+
+@app.route("/delete_show/<id>/<name>",methods=["GET","POST"])
+def delete_show(id,name):
+    s=get_show(id)
+    db.session.delete(s)
+    db.session.commit()
+    return redirect(url_for("admin_dashboard",name=name))
+
+
+
 
 
 
@@ -134,5 +168,8 @@ def search_by_location(search_txt):
     theatres=Theatre.query.filter(Theatre.location.ilike(f"%{search_txt}%")).all()
     return theatres
 def get_venue(id):
-    theatre=Theatre.query.filter(id=id).first()
+    theatre=Theatre.query.filter_by(id=id).first()
     return theatre
+def get_show(id):
+    show=Show.query.filter_by(id=id).first()
+    return show

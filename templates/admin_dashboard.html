@@ -14,7 +14,7 @@
                           <table>
                             <tr><th>ID</th><th>Name</th><th>Date/Time</th></tr>
                             {%for show in theatre.shows%}
-                            <tr><th><a href="#">{{show.id}}</a></th><th>{{show.name}}</th><th>{{show.date_time}}</th></tr>
+                            <tr><th><a href="/edit_show/{{show.id}}/{{name}}">{{show.id}}</a></th><th>{{show.name}}</th><th>{{show.date_time}}</th></tr>
                             {%endfor%}
                           </table>
                           {%else%}
