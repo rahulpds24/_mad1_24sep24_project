@@ -1,0 +1,30 @@
+{%extends "user_layout.html"%}  
+{%block content%}
+            
+            <div class="center"><h2>Book Ticket</h2></div>
+            <form action="book_ticket/??" method="POST">
+            <div class="input_form">
+                <div class="mb-3">
+                    <label for="uid" class="form-label">User ID</label>
+                    <input type="text" class="form-control" name="uid" id="uid" default="{{uid}}" readonly>
+                  </div>
+                  <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" name="location" id="location" placeholder="">
+                  </div>
+                  <div class="mb-3">
+                    <label for="pin_code" class="form-label">Pincode</label>
+                    <input type="number" class="form-control" name="pin_code" id="pin_code" placeholder="">
+                  </div>
+                  <div class="mb-3">
+                    <label for="capacity" class="form-label">Capacity</label>
+                    <input type="number" class="form-control" name="capacity" id="capacity" placeholder="">
+                  </div>
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="/admin/{{name}}" type="button" class="btn btn-primary">Cancel</a> 
+                    
+                  </div>
+
+            </div></form>
+            {%endblock%}

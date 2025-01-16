@@ -4,6 +4,7 @@ from flask import Flask,render_template,request,url_for,redirect
 from flask import current_app as app
 from backend.models import *
 from datetime import datetime
+from sqlalchemy import func
 
 @app.route("/") 
 def home():
@@ -18,7 +19,7 @@ def signin():
         if usr and usr.role==0:
             return redirect(url_for("admin_dashboard",name=uname))
         if usr and usr.role==1:
-            return redirect(url_for("user_dashboard",name=uname))
+            return redirect(url_for("user_dashboard",name=uname,id=usr.id))
         else:
             return render_template("login.html",msg="invalid user")
 
@@ -49,10 +50,10 @@ def admin_dashboard(name):
     theatres=get_theatres()
     return render_template("admin_dashboard.html",name=name,theatres=theatres)
 
-@app.route("/user/<name>")
-def user_dashboard(name):
+@app.route("/user/<id>/<name>")
+def user_dashboard(id,name):
     theatres=get_theatres()
-    return render_template("user_dashboard.html",name=name,theatres=theatres)
+    return render_template("user_dashboard.html",uid=id,name=name,theatres=theatres)
 
 #common route for admin dashboard
 @app.route("/venue/<name>",methods=["POST","GET"])
@@ -144,6 +145,25 @@ def delete_show(id,name):
     db.session.delete(s)
     db.session.commit()
     return redirect(url_for("admin_dashboard",name=name))
+
+@app.route("/book_ticket/<uid>/<sid>/<name>",methods=["POST","GET"])
+def book_ticket(uid,sid,name):
+    if request.method=="POST":
+        no_of_ticket=request.form.get("no_of_tickets")
+        new_ticket=Ticket(no_of_ticket=no_of_ticket,sl_nos="",user_id=uid,show_id=sid)
+        db.session.add(new_ticket)
+        db.session.commit()
+        return redirect(url_for("user_dashboard",id=uid,name=name))
+    show=Show.query.filter_by(id=sid).first()
+    theatre=Theatre.query.filter_by(id=show.theatre_id).first()
+    available_seat=theatre.capacity
+    #booked ticket by aggregator function
+    book_ticket=Ticket.query.with_entities(func.sum(Ticket.no_of_ticket)).group_by(Ticket.show_id).filter_by(show_id=sid)
+    if book_ticket:
+        available_seat -= book_ticket[0]
+    #
+    return render_template("book_ticket.html",uid=uid,sid=sid,name=name,tname=theatre.name,sname=show.name,available_seat=available_seat,tkt_price=show.ticket_price)
+
 
 
 

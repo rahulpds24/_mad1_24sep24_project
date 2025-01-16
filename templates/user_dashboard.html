@@ -10,19 +10,21 @@
               <div class="container">
                 <div class="row">
                   {%for show in theatre.shows%}
+                  {%if show.date_time >= dt_time_now%}
                   <div class="col">
                     <!-- show 1 card here -->
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                           <h5 class="card-title">{{show.name}}</h5>
-                          <h6 class="card-subtitle">{{show.tags}}</h6>
-                          <button type="button" class="btn btn-outline-priamry">Book</button>
+                          <h6 class="card-subtitle">{{show.tags}}, show Time:{{show.date_time}}</h6>
+                          <a href="/book_ticket/??" type="button" class="btn btn-outline-priamry">Book</a>
                         </div>
                        
                       </div>
 
                     
                   </div>
+                  {%endif%}
                   {%endfor%}
                  
                   
